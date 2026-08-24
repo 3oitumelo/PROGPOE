@@ -12,8 +12,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         ClinicManager clinic = new ClinicManager();
-        ReferralPatient patient = new ReferralPatient();
-        PatientCategory categoty = new PatientCategory();
+        
         
         
         
@@ -56,11 +55,11 @@ public class Main {
              }else if (choice == 3){
                  updatePatient(input, clinic);
              }else if (choice == 4){
-                 deletePatient(inout, clinic);
+                 deletePatient(input, clinic);
              }else if(choice == 5){
-                 clinic.displayAllPatient()
+                 clinic.displayAllPatients();
              }else if(choice == 6){
-                 displaySortMenu()
+                 displaySortMenu(input, clinic);
              }else if(choice == 7){
                  allocateRoom(input, clinic);
              }else if (choice == 8){
@@ -109,7 +108,7 @@ public class Main {
     }
     
     //register patient 
-    public static void registerPatient(Scanner input, ClincManager clinic){
+    public static void registerPatient(Scanner input, ClinicManager clinic){
         System.out.println();
         System.out.println("REGISTER PATIENT");
         System.out.println(" ------------------- ");
@@ -124,7 +123,7 @@ public class Main {
         
         //fetch surname
         System.out.println("Last Name: ");
-        Striing lastName = input.nextLine();
+        String lastName = input.nextLine();
         
         //fetch age
         System.out.println("Age: ");
@@ -169,7 +168,7 @@ public class Main {
         //create a patient variable
         Patient patient;
         
-        if(category == PatientCategory.REFERRAL){
+        if( category == PatientCategory.REFERRAL){ 
             
             System.out.println("Referring Doctor: ");
             String referringDoctor = input.nextLine();
@@ -181,17 +180,17 @@ public class Main {
             String referralDate = input.nextLine();
             
             //create referral object
-            patient = new ReferralPatient(id, firstName, lastName, age, gender, condition, referringDoctore, referringHospital, referralDate);
+            patient = new ReferralPatient(id, firstName, lastName, age, gender, medicalCondition, referringDoctor, referringHospital, referralDate);
             
         }else {
             
             //create normal patient object
-            patient = new Patient(id, firstName, lastName, age, gender, condition, category);
+            patient = new Patient(id, firstName, lastName, age, gender, medicalCondition, category);
             
         }
         clinic.registerPatient(patient);
         
-        if(category == PatietCategory.REFERRAL){
+        if( category == PatientCategory.REFERRAL){
             clinic.allocateRoom(id);
         }
     }
@@ -217,7 +216,9 @@ public class Main {
     public static void updatePatient(Scanner input, ClinicManager clinic){
         
         System.out.println("Enter Patient ID: ");
-        string id = input.nextLine();
+        String id = input.nextLine();
+        
+        Patient patient = clinic.searchPatient(id);
         
         if(patient != null){
             
@@ -260,7 +261,7 @@ public class Main {
         String patientId = input.nextLine();
         
         //allocate room
-        clinic.allocateRoom(PatientId);
+        clinic.allocateRoom(patientId);
     }
     
     //release room
@@ -308,9 +309,9 @@ public class Main {
         System.out.println("Total Occupied Rooms: " + clinic.getOccupiedRooms());
         
         //display available rooms
-        System.out.println("Total Avaibale Rooms: " + clinic.getAvaibleRooms());
+        System.out.println("Total Avaibale Rooms: " + clinic.getAvailableRooms());
         
         //display occupancy percentage
-        System.out.println("Clinc Occupancy: " + String.format("%.1f", clinic.getOccupancyPercenatage()) + "%");
+        System.out.println("Clinc Occupancy: " + String.format("%.1f", clinic.getOccupanyPercentage()) + "%");
     }
 }

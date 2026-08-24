@@ -13,7 +13,7 @@ class Patient {
     private int age;
     private String gender;
     private String medicalCondition;
-    private PatientCategory patientCategory;
+    PatientCategory patientCategory;
     
     //constructor
 

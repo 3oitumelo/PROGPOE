@@ -10,6 +10,7 @@ import java.util.ArrayList;
 class ClinicManager {
     private ArrayList<Patient> patients;
     private ConsultationRoom[][] rooms; 
+    private ArrayList<Patient> patientList = new ArrayList<>();
     
     public ClinicManager(){
         patients = new ArrayList<>();
@@ -34,7 +35,7 @@ class ClinicManager {
                     roomName = "R" + roomNumber;
                     
                 }
-                rooms[row][colomn] = new ConsultationRoom(roomName);
+                rooms[row][colomn] = new ConsultationRoom(roomName, false, "");
                 
                 roomNumber++;
             }
@@ -53,20 +54,30 @@ class ClinicManager {
         
         System.out.println("Patient registered successfully. ");
     }
-    //search patient
-   for(int i = 0; i < patients.size(); i++){
-    Patient patient = patients.get(i);
     
-    if(patient.getPatientId().equals(patientId)){
-    return patient;
-    
+     public Patient searchPatient(String patientId) {
+
+        // Loop through the ArrayList
+        for (int i = 0; i < patients.size(); i++) {
+
+            // Get the patient at the current position
+            Patient patient = patients.get(i);
+
+            // Compare the IDs
+            if (patient.getPatientId().equals(patientId)) {
+
+                // Return the patient if found
+                return patient;
 }
+    
+
+    
     
 }
    return null;
    
 }
-public void updatePatient(String patientId, String firstName, String lastName, int age, String gender, String medicalCondition){
+     public void updatePatient(String patientId, String firstName, String lastName, int age, String gender, String medicalCondition){
     Patient patient = searchPatient(patientId);
     
     if(patient != null){
@@ -82,9 +93,9 @@ public void updatePatient(String patientId, String firstName, String lastName, i
     }else{
         System.out.println("Patient not found.");
     }
+     
 }
-
-//delete patient
+     //delete patient
 public void deletePatient(String patientId){
     Patient patient = searchPatient(patientId);
     
@@ -92,13 +103,15 @@ public void deletePatient(String patientId){
         
         releaseRoomByPatientId(patientId);
         
-        patient.remove(patient);
+        patients.remove(patient);
         
         System.out.println("Patient deleted sucessfully.");
         
     }else{
         System.out.println("Patient not found.");
     }
+     
+
 }
 //display all patients
 public void displayAllPatients(){
@@ -114,6 +127,7 @@ public void displayAllPatients(){
         
         patient.displayPatient();
     }
+
 }
 //sort patients by last name
 public void sortPatientsByLastName(){
@@ -122,7 +136,7 @@ public void sortPatientsByLastName(){
     for(int i = 0; i < patients.size() -1; i++){
         for(int j = 0; j < patients.size() - 1 - i; j++){
             
-            Patient p1 = patients.gets(j);
+            Patient p1 = patients.get(j);
             Patient p2 = patients.get(j + 1);
             
             if(p1.getLastName().compareTo(p2.getLastName()) > 0){
@@ -149,9 +163,7 @@ public void sortPatientsById(){
             }
         }
     }
-    
 }
-
 //display sorted patients by last name
 public void displaySortedPatients(){
     
@@ -164,7 +176,6 @@ public void displaySortedPatients(){
     displayAllPatients();
     
 }
-
 //diplay sorted patients by ID
 
 public void displayPatientsById(){
@@ -177,7 +188,6 @@ public void displayPatientsById(){
     
     displayAllPatients();
 }
-
 //display room layout
 
 public void displayRoomLayout(){
@@ -203,6 +213,7 @@ public void displayRoomLayout(){
     }
 
 }
+
 //display availabel rooms
 public void displayAvailableRooms(){
     System.out.println();
@@ -226,8 +237,10 @@ public void displayAvailableRooms(){
     if(!found){
         System.out.println("No available rooms.");
     }
-}
 
+
+
+}
 //display occupies rooms
 
 public void displayOccupiedRooms(){
@@ -249,7 +262,8 @@ public void displayOccupiedRooms(){
                 found = true;
             }
         }
-    }
+
+}
     if(!found){
         System.out.println("No occupied rooms.");
     }
@@ -267,12 +281,18 @@ public void allocateRoom(String patientId){
         
         return;
     }
-    if(patient.getCategory() != PatientCategory.REFERRAL){
+    if(patient.getpatientCategory()!= PatientCategory.REFERRAL){
         
         System.out.println("Only referral patients " + "can be allocated a room.");
         
         return;
     }
+    if(getPatientRoom(patientId) != null){
+        System.out.println("Patient already has a room allocated.");
+        
+        return;
+    }
+    
     for(int row = 0; row < rooms.length; row++){
         for(int colomn = 0; colomn < rooms[row].length; colomn++){
             
@@ -291,28 +311,52 @@ public void allocateRoom(String patientId){
     System.out.println("No rooms available.");
 }
 
-//release room by room number
-public void releaseRoom(String roomNumber){
-    
-    for(int row = 0; row < rooms.length; colomn++){
-        
-        ConsultationRoom room = rooms[row][colomn];
-        
-        if(room.getRoomNumber().equals(roomNumber)){
-            if(room.isOccupied()){
-                
-                room.releaseRoom();
-                
-                System.out.println("Room released successfully.");
-                
-            }else{
-                System.out.println("Room is already available.");
+//release room
+public void releaseRoom(String roomNumber) {
+
+        // Loop through all rows
+        for (int row = 0;
+             row < rooms.length;
+             row++) {
+
+            // Loop through all columns
+            for (int column = 0;
+                 column < rooms[row].length;
+                 column++) {
+
+                // Get the current room
+                ConsultationRoom room =
+                        rooms[row][column];
+
+                // Check the room number
+                if (room.getRoomNumber()
+                        .equals(roomNumber)) {
+
+                    // Check if room is occupied
+                    if (room.isOccupied()) {
+
+                        // Release the room
+                        room.releaseRoom();
+
+                        System.out.println(
+                                "Room released successfully.");
+
+                    } else {
+
+                        System.out.println(
+                                "Room is already available.");
+                    }
+
+                    // Stop the method
+                    return;
+                }
             }
-            return;
         }
+
+        // Room was not found
+        System.out.println(
+                "Room not found.");
     }
-    System.out.println("Room not found.");
-}
 //release room by patient id
 public void releaseRoomByPatientId(String patientId){
     
@@ -326,13 +370,12 @@ public void releaseRoomByPatientId(String patientId){
         System.out.println("Patient has no room allocated.");
     }
 }
-
 //get patient's room
 
 public String getPatientRoom(String patientId){
     
     for(int row = 0; row < rooms.length; row++){
-        for(int colomn = 0; colomn < room[row].length; colomn++){
+        for(int colomn = 0; colomn < rooms[row].length; colomn++){
             
             ConsultationRoom room = rooms[row][colomn];
             
@@ -344,17 +387,19 @@ public String getPatientRoom(String patientId){
     }
     return null;
 }
+
 //count total patients
 public int getTotalPatients(){
     
     return patients.size();
 }
-
 //count occupied rooms
 public int getOccupiedRooms(){
     
     int count = 0;
     for(int row = 0; row < rooms.length; row++){
+        for(int colomn = 0; colomn < rooms[row].length; colomn++){
+            
         
         if(rooms[row][colomn].isOccupied()){
             
@@ -362,7 +407,8 @@ public int getOccupiedRooms(){
         }
     }
 }
-return count;
+    return count;
+}
 
 //count avaliable rooms
 public int getAvailableRooms(){
@@ -370,20 +416,17 @@ public int getAvailableRooms(){
     return 20 - getOccupiedRooms();
     
 }
-
 //calculate occupany percentage
 public double getOccupanyPercentage(){
     
     int occupied = getOccupiedRooms();
     int totalRooms = 20;
     
-    double percentage - (occupied * 110.0) / totalRooms;
+    double percentage = (occupied * 100.0) / totalRooms;
     
     return percentage;
-    
+
 }
 
-
-
-
+}
 
