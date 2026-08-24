@@ -311,7 +311,79 @@ public void releaseRoom(String roomNumber){
             return;
         }
     }
+    System.out.println("Room not found.");
+}
+//release room by patient id
+public void releaseRoomByPatientId(String patientId){
+    
+    String roomNumber = getPatientRoom(patientId);
+    
+    if(roomNumber != null){
+        
+        releaseRoom(roomNumber);
+        
+    }else{
+        System.out.println("Patient has no room allocated.");
+    }
+}
+
+//get patient's room
+
+public String getPatientRoom(String patientId){
+    
+    for(int row = 0; row < rooms.length; row++){
+        for(int colomn = 0; colomn < room[row].length; colomn++){
+            
+            ConsultationRoom room = rooms[row][colomn];
+            
+            if(room.isOccupied() && room.getPatientId().equals(patientId)){
+                
+                return room.getRoomNumber();
+            }
+        }
+    }
+    return null;
+}
+//count total patients
+public int getTotalPatients(){
+    
+    return patients.size();
+}
+
+//count occupied rooms
+public int getOccupiedRooms(){
+    
+    int count = 0;
+    for(int row = 0; row < rooms.length; row++){
+        
+        if(rooms[row][colomn].isOccupied()){
+            
+            count++;
+        }
+    }
+}
+return count;
+
+//count avaliable rooms
+public int getAvailableRooms(){
+    
+    return 20 - getOccupiedRooms();
     
 }
+
+//calculate occupany percentage
+public double getOccupanyPercentage(){
+    
+    int occupied = getOccupiedRooms();
+    int totalRooms = 20;
+    
+    double percentage - (occupied * 110.0) / totalRooms;
+    
+    return percentage;
+    
+}
+
+
+
 
 
