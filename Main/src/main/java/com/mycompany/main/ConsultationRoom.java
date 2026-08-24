@@ -4,10 +4,54 @@
  */
 package com.mycompany.main;
 
-/**
- *
- * @author Malcolm
- */
 class ConsultationRoom {
+    
+    private String roomNumber;
+    private boolean Occupied;
+    private String patientId;
+    
+    //constructor
+
+    public ConsultationRoom(String roomNumber, boolean Occupied, String patientId) {
+        this.roomNumber = roomNumber;
+        this.Occupied = false;
+        this.patientId = "";
+    }
+    
+    //getter
+
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public boolean isOccupied() {
+        return Occupied;
+    }
+
+    public String getPatientId() {
+        return patientId;
+    }
+
+//allocate room to a patient
+public void allocateRoom(String patientId){
+    this.patientId = patientId;
+    this.Occupied = true;
+}    
+public void releaseRoom(){
+    this.patientId = "";
+    this.Occupied = false;
+}
+//diplay room information
+public void displayRoom(){
+    
+    if(occupied == true){
+        
+        System.out.println(roomNumber + " - OCCUPIED - Patient: " + patientId);
+        
+    }else{
+        System.out.println(roomNumber + " - AVAILABLE");
+    }
+}
+    
     
 }
