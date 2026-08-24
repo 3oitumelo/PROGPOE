@@ -13,43 +13,48 @@ public class ReferralPatient extends Patient {
     
     //constructor
 
-    public ReferralPatient(String referringDoctor, String referringHospital, String referralDate, int age, String patientId, String firstName, String lastName, String gender, String medicalCondition) {
-        super( patientId,  firstName,  lastName, age, gender, medicalCondition, patientCategory);
-        this.referringDoctor = "";
-        this.referringHospital = "";
-        this.referralDate = "";
-        
-        
-        
-     
-        }
-        //getters
-
-    public String getReferringDoctor() {
-        return referringDoctor;
-    }
-
-    public String getReferringHospital() {
-        return referringHospital;
-    }
-
-    public String getReferralDate() {
-        return referralDate;
-    }
-    
-    //setters
-
-    public void setReferringDoctor(String referringDoctor) {
+    public ReferralPatient(String referringDoctor, String referringHospital, String referralDate, String patientId, String firstName, String lastName, int age, String gender, String medicalCondition, PatientCategory patientCategory) {
+        super(patientId, firstName, lastName, age, gender, medicalCondition, patientCategory);
         this.referringDoctor = referringDoctor;
-    }
-
-    public void setReferringHospital(String referringHospital) {
         this.referringHospital = referringHospital;
-    }
-
-    public void setReferralDate(String referralDate) {
         this.referralDate = referralDate;
     }
+      //getters
+        public String getReferringDoctor() {
+            return referringDoctor;
+        }
+
+        public String getReferringHospital() {
+            return referringHospital;
+        }
+
+        public String getReferralDate() {
+            return referralDate;
+        }
+
+        public PatientCategory getPatientCategory() {
+            return patientCategory;
+        }
+
+    //setters
+
+        public void setReferringDoctor(String referringDoctor) {
+            this.referringDoctor = referringDoctor;
+        }
+
+        public void setReferringHospital(String referringHospital) {
+            this.referringHospital = referringHospital;
+        }
+
+        public void setReferralDate(String referralDate) {
+            this.referralDate = referralDate;
+        }
+
+        public void setPatientCategory(PatientCategory patientCategory) {
+            this.patientCategory = patientCategory;
+        }
+        
+        
     
 @Override
 public void displayPatient(){
