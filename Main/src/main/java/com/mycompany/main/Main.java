@@ -12,6 +12,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         ClinicManager clinic = new ClinicManager();
+        ReferralPatient patient = new ReferralPatient();
+        
         
         int choice = 0;
         

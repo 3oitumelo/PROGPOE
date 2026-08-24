@@ -99,7 +99,7 @@ class Patient {
         System.out.println("Age: " + age);
         System.out.println("Gender: " + gender);
         System.out.println("Medical Condition: " + medicalCondition);
-        System.out.println("Category: " + patientCategory);
+        System.out.println("Category: " + Category);
         System.out.println(" ------------------------------- ");
     }
     
