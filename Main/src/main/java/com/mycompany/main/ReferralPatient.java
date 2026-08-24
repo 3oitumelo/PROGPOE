@@ -13,18 +13,13 @@ public class ReferralPatient extends Patient {
     
     //constructor
 
-    public ReferralPatient(String referringDoctor, String referringHospital, String referralDate, String patientId, String firstName, String lastName, int age, String gender, String medicalCondition, String PatientCategory.REFERRAL) {
-        super(patientId, firstName, lastName, age, gender, medicalCondition, PatientCategory);
+    public ReferralPatient(String referringDoctor, String referringHospital, String referralDate, String patientId, String firstName, String lastName, int age, String gender, String medicalCondition, PatientCategory patientCategory) {
+        super( patientId,  firstName,  lastName, age, gender, medicalCondition, patientCategory);
         this.referringDoctor = "";
         this.referringHospital = "";
         this.referralDate = "";
         
-        public ReferralPatient(String patientId, String firstName, String lastName, int age, String gender, String medicalCondition, String referringDoctor, String referringHospital, String referralDate){
-            super(patientId, firstName, lastName, age, gender, medicalCondition, PatientCategory.REFERRAL);
-            this.referringDoctor = "";
-            this.referringHospital = "";
-            this.referralDate = "";
-            
+     
         }
         //getters
 
@@ -67,7 +62,7 @@ public void displayPatient(){
     System.out.println("Last Name: " + getLastName());
     System.out.println("Age: " + getAge());
     System.out.println("Gender: " + getGender());
-    System.out.println("Medical Condition: " + getMedicalMedicalCondition());
+    System.out.println("Medical Condition: " + getMedicalCondition());
     System.out.println("Category: " + getCategory);
     
     //dsiplay referral for specific information
@@ -81,4 +76,4 @@ public void displayPatient(){
     }
     
     
-}
+

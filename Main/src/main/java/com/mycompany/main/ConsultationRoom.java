@@ -44,7 +44,7 @@ public void releaseRoom(){
 //diplay room information
 public void displayRoom(){
     
-    if(occupied == true){
+    if(Occupied == true){
         
         System.out.println(roomNumber + " - OCCUPIED - Patient: " + patientId);
         

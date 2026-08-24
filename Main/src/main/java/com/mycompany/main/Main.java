@@ -13,6 +13,8 @@ public class Main {
         Scanner input = new Scanner(System.in);
         ClinicManager clinic = new ClinicManager();
         ReferralPatient patient = new ReferralPatient();
+        PatientCategory categoty = new PatientCategory();
+        
         
         
         int choice = 0;
