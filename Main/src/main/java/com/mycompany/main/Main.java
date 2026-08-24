@@ -153,7 +153,7 @@ public class Main {
         input.nextLine();
         
         //variable to store the categories
-        PatientCategory category;
+        PatientCategory category = PatientCategory.REGULAR;
         
         if(categoryChoice == 1){
             category = PatientCategory.REGULAR;
