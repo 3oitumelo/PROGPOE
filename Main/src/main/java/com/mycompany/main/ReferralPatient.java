@@ -63,7 +63,7 @@ public void displayPatient(){
     System.out.println("Age: " + getAge());
     System.out.println("Gender: " + getGender());
     System.out.println("Medical Condition: " + getMedicalCondition());
-    System.out.println("Category: " + getCategory);
+    System.out.println("Category: " + getpatientCategory());
     
     //dsiplay referral for specific information
     System.out.println("Referring Doctor: " + referringDoctor);
