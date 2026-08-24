@@ -13,7 +13,7 @@ public class ReferralPatient extends Patient {
     
     //constructor
 
-    public ReferralPatient(String referringDoctor, String referringHospital, String referralDate, String patientId, String firstName, String lastName, int age, String gender, String medicalCondition, PatientCategory patientCategory) {
+    public ReferralPatient(String patientId, String firstName, String lastName, int age, String gender, String medicalCondition, PatientCategory patientCategory,String referringDoctor, String referringHospital, String referralDate) {
         super(patientId, firstName, lastName, age, gender, medicalCondition, patientCategory);
         this.referringDoctor = referringDoctor;
         this.referringHospital = referringHospital;

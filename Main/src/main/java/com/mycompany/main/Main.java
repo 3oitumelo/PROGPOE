@@ -167,32 +167,27 @@ public class Main {
         }
         //create a patient variable
         Patient patient;
-        
-        if( category == PatientCategory.REFERRAL){ 
-            
+        if(category == PatientCategory.REFERRAL){
             System.out.println("Referring Doctor: ");
             String referringDoctor = input.nextLine();
             
             System.out.println("Referring Hospital: ");
             String referringHospital = input.nextLine();
             
-            System.out.println("Referral Date (YYYY-MM-DD): ");
+            System.out.println("Referral Date: ");
             String referralDate = input.nextLine();
             
-            //create referral object
-            patient = new ReferralPatient(id, firstName, lastName, age, gender, medicalCondition, referringDoctor, referringHospital, referralDate);
+            patient = new ReferralPatient(id, firstName, lastName, age, gender, medicalCondition, category, referringDoctor, referringHospital, referralDate);
             
-        }else {
-            
-            //create normal patient object
+        }else{
             patient = new Patient(id, firstName, lastName, age, gender, medicalCondition, category);
             
         }
         clinic.registerPatient(patient);
-        
         if( category == PatientCategory.REFERRAL){
             clinic.allocateRoom(id);
         }
+        
     }
     public static void searchPatient(Scanner input, ClinicManager clinic){
         System.out.println("Please Enter Patient ID: ");

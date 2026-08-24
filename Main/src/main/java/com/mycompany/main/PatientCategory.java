@@ -10,4 +10,5 @@ public enum PatientCategory {
     REGULAR,
     REFERRAL,
     EMERGENCY
+    
 }
